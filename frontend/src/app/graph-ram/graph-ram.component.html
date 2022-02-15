@@ -1,0 +1,41 @@
+<div id="wrapper">
+  <app-nav></app-nav>
+  <div id="page-wrapper" class="gray-bg">
+      <app-menu></app-menu>
+      <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Multiple Axes Line Chart Example </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#" class="dropdown-item">Config option 1</a>
+                            </li>
+                            <li><a href="#" class="dropdown-item">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                      <canvas id="realtime">{{ chart }}</canvas>
+                      <div class="card-content">
+                        <h3>Gráfica a tiempo real</h3>
+                        <p>Porcentaje de memoria utilizado: {{porcentaje}}</p>
+                      </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
