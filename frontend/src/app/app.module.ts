@@ -10,7 +10,6 @@ import { ListaprocesosComponent } from './listaprocesos/listaprocesos.component'
 import { MenuComponent } from './menu/menu.component';
 import { NavComponent } from './nav/nav.component';
 import { PrincipalComponent } from './principal/principal.component';
-import { ProcesosComponent } from './procesos/procesos.component';
 import { HttpClientModule} from '@angular/common/http'
 
 import { ChartModule } from 'angular2-chartjs';
@@ -29,7 +28,6 @@ import { ToastrModule } from 'ngx-toastr';
     MenuComponent,
     NavComponent,
     PrincipalComponent,
-    ProcesosComponent
   ],
   imports: [
     BrowserModule,
