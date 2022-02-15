@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArbolprocesoComponent implements OnInit {
 
+  info : any[] = [];
+  panelOpenState = false;
+
   constructor() { }
 
   ngOnInit(): void {

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GraphRamComponent implements OnInit {
 
+  chart = ""
+  porcentaje = 0
   constructor() { }
 
   ngOnInit(): void {

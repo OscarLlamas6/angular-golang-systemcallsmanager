@@ -1,1 +1,67 @@
-<p>arbolproceso works!</p>
+<div id="wrapper">
+  <app-nav></app-nav>
+  <div id="page-wrapper" class="gray-bg">
+      <app-menu></app-menu>
+
+      <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Árbol de procesos</h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a>Procesos</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>Árbol de procesos</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let item of info" (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{item.pid}} - {{item.nombre}}
+        </mat-panel-title>
+        <mat-panel-description>
+         No.Hijos: {{item.num}}, Estado: {{item.estado}}, RAM: {{item.ram}}%
+        </mat-panel-description>
+      </mat-expansion-panel-header >
+      <table class ="table">
+        <thead>
+          <tr>
+            <th>PID</th>
+            <th>Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let hijo of item.hijos">
+            <td>{{hijo.pid}}</td>
+            <td>{{item.nombre}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>
+<div class="footer">
+    <div class="float-right">
+        Proyecto <strong>1</strong> Diciembre 2021.
+    </div>
+    <div>
+        <strong>SO1</strong> Carné: &copy; 201602676
+    </div>
+</div>
+  </div>
+ </div>

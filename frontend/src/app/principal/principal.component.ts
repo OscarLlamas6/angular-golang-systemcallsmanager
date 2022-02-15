@@ -7,6 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrincipalComponent implements OnInit {
 
+  total:any = "";
+  totalm : any = ""
+  usada: any ="";
+  libre : any ="";
+  cache : any ="";
+  porcentaje : any ="";
+  porcentajeLibre:any = "";
+  por = "";
+
   constructor() { }
 
   ngOnInit(): void {

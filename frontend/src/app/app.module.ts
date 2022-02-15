@@ -1,3 +1,4 @@
+import { ServiciosService } from './servicios/servicios.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -10,6 +11,14 @@ import { MenuComponent } from './menu/menu.component';
 import { NavComponent } from './nav/nav.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { ProcesosComponent } from './procesos/procesos.component';
+import { HttpClientModule} from '@angular/common/http'
+
+import { ChartModule } from 'angular2-chartjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatSliderModule } from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -24,9 +33,16 @@ import { ProcesosComponent } from './procesos/procesos.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ChartModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatExpansionModule,
   ],
-  providers: [],
+  providers: [ServiciosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
