@@ -137,19 +137,10 @@ func CPU(c *gin.Context) {
 	})
 }
 
-func response(c *gin.Context, summary []SysCall, system_calls []SystemCall) {
-    c.JSON(http.StatusOK, gin.H{
-        "summary": summary,
-        "system_calls": system_calls,
-    })
-}
-
 func Strace(c *gin.Context) {
 	decoder := json.NewDecoder(c.Request.Body)
 	var params map[string]string
 	decoder.Decode(&params)
-    default_syscalls := SysCalls{}
-    default_systemcalls := SystemCalls{}
 
 	if len(params) != 0 {
         var err error
@@ -191,20 +182,21 @@ func Strace(c *gin.Context) {
 
     		err = syscall.PtraceSyscall(pid, 0)
     		if err != nil {
-    			response(c, default_syscalls.Calls , default_systemcalls.Calls)
     			panic(err)
     		}
 
     		_, err = syscall.Wait4(pid, nil, 0, nil)
     		if err != nil {
-    			response(c, default_syscalls.Calls , default_systemcalls.Calls)
     			panic(err)
     		}
 
     		exit = !exit
     	}
 
-        response(c, ss.getSummary(), obj.Calls)
+        c.JSON(http.StatusOK, gin.H{
+            "summary": ss.getSummary(),
+            "system_calls": obj.Calls,
+        })
     }
 }
 
