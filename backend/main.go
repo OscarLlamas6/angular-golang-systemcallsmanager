@@ -6,10 +6,20 @@ import (
 	"log"
 	"net/http"
 	"os/exec"
+	"syscall"
 	"strings"
 
 	"github.com/gin-gonic/gin"
 )
+
+type SystemCall struct {
+    Id   uint64 `json:"id"`
+    Name string `json:"name"`
+}
+
+type SystemCalls struct {
+    Calls []SystemCall
+}
 
 func CORSMiddleware() gin.HandlerFunc {
 
