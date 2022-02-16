@@ -148,8 +148,8 @@ func Strace(c *gin.Context) {
 	decoder := json.NewDecoder(c.Request.Body)
 	var params map[string]string
 	decoder.Decode(&params)
-    default_syscalls []SysCalls
-    default_systemcalls []SystemCalls
+    default_syscalls := SysCalls{}
+    default_systemcalls := SystemCalls{}
 
 	if len(params) != 0 {
         var err error
