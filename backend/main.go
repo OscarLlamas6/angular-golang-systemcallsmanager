@@ -169,7 +169,7 @@ func Strace(c *gin.Context) {
         err = cmd.Wait()
         if err != nil {
             fmt.Printf("Wait err %v \n", err)
-            response(c, default_syscalls.Syscall , default_systemcalls.SystemCall)
+            response(c, default_syscalls.Calls , default_systemcalls.Calls)
         }
 
     	var pid = cmd.Process.Pid
@@ -193,13 +193,13 @@ func Strace(c *gin.Context) {
     		err = syscall.PtraceSyscall(pid, 0)
     		if err != nil {
     			panic(err)
-    			response(c, default_syscalls.Syscall , default_systemcalls.SystemCall)
+    			response(c, default_syscalls.Calls , default_systemcalls.Calls)
     		}
 
     		_, err = syscall.Wait4(pid, nil, 0, nil)
     		if err != nil {
     			panic(err)
-    			response(c, default_syscalls.Syscall , default_systemcalls.SystemCall)
+    			response(c, default_syscalls.Calls , default_systemcalls.Calls)
     		}
 
     		exit = !exit
