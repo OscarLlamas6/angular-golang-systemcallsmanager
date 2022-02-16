@@ -136,11 +136,18 @@ func CPU(c *gin.Context) {
 	})
 }
 
+func response(c *gin.Context, summary []SysCall, system_calls []SystemCall) {
+    c.JSON(http.StatusOK, gin.H{
+        "summary": summary,
+        "system_calls": system_calls,
+    })
+}
 
 func Strace(c *gin.Context) {
 	decoder := json.NewDecoder(c.Request.Body)
 	var params map[string]string
 	decoder.Decode(&params)
+
 	if len(params) != 0 {
         var err error
         var regs syscall.PtraceRegs
@@ -170,16 +177,13 @@ func Strace(c *gin.Context) {
     			if err != nil {
     				break
     			}
-    			name := ss.getName(regs.Orig_rax)
 
-    			 obj_system_call := SystemCall{
-                     Id:  regs.Orig_rax,
-                     Name: name,
-                 }
-
-                 obj.AddItem(obj_system_call)
-
-    			ss.inc(regs.Orig_rax)
+    			obj_system_call := SystemCall{
+                    Id:  regs.Orig_rax,
+                    Name: ss.getName(regs.Orig_rax),
+                }
+                obj.AddItem(obj_system_call)
+                ss.inc(regs.Orig_rax)
     		}
 
     		err = syscall.PtraceSyscall(pid, 0)
@@ -195,10 +199,7 @@ func Strace(c *gin.Context) {
     		exit = !exit
     	}
 
-        c.JSON(http.StatusOK, gin.H{
-            "summary": ss.getSummary(),
-            "system_calls": obj.Calls,
-        })
+        response(c, ss.getSummary(), obj.Calls)
     }
 }
 
