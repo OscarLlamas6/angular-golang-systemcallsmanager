@@ -148,6 +148,8 @@ func Strace(c *gin.Context) {
 	decoder := json.NewDecoder(c.Request.Body)
 	var params map[string]string
 	decoder.Decode(&params)
+    default_syscalls := []SysCalls
+    default_systemcalls := []SystemCalls
 
 	if len(params) != 0 {
         var err error
@@ -167,6 +169,7 @@ func Strace(c *gin.Context) {
         err = cmd.Wait()
         if err != nil {
             fmt.Printf("Wait err %v \n", err)
+            response(c, default_syscalls.Syscall , default_systemcalls.SystemCall)
         }
 
     	var pid = cmd.Process.Pid
@@ -190,11 +193,13 @@ func Strace(c *gin.Context) {
     		err = syscall.PtraceSyscall(pid, 0)
     		if err != nil {
     			panic(err)
+    			response(c, default_syscalls.Syscall , default_systemcalls.SystemCall)
     		}
 
     		_, err = syscall.Wait4(pid, nil, 0, nil)
     		if err != nil {
     			panic(err)
+    			response(c, default_syscalls.Syscall , default_systemcalls.SystemCall)
     		}
 
     		exit = !exit
