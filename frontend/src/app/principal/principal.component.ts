@@ -20,6 +20,9 @@ export class PrincipalComponent implements OnInit {
   porcentajeLibre:any = "";
   por = "";
   ngOnInit(): void {
+    this.ram.getStrace().subscribe((resultado:any)=>{
+      console.log(resultado);
+    })
     //{ total: 3057176, usada: 2304560, libre: 99636, cache: 616708, buffer: 36272, porcentaje: 75 }
     interval(1000)
     .pipe(takeWhile(() => true))

@@ -10,6 +10,9 @@ export class ServiciosService {
 
   url = "http://192.168.0.19:8080/"
 
+  strace = "http://34.123.112.42:3000/"
+
+
   cabecera = new HttpHeaders();
 
   getInfoRam():Observable<any>{
@@ -17,6 +20,14 @@ export class ServiciosService {
   }
   getProcesos():Observable<any>{
     return this.http.get(this.url+"procesos");
+  }
+
+  getStrace():Observable<any>{
+    return this.http.post(this.strace+"api/strace",
+    {
+      name: "nfsd"
+    }
+    );
   }
 
   kill(pid:string):Observable<any>{
