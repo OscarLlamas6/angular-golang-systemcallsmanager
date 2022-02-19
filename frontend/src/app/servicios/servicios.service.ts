@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ServiciosService {
   constructor(private http:HttpClient) { }
 
-  url = "http://192.168.0.19:8080/"
+  url = "http://192.168.0.19:3000/api/"
 
   strace = "http://34.123.112.42:3000/"
 
@@ -16,7 +16,7 @@ export class ServiciosService {
   cabecera = new HttpHeaders();
 
   getInfoRam():Observable<any>{
-    return this.http.get(this.url+"RAM");
+    return this.http.get(this.url+"ram");
   }
   getProcesos():Observable<any>{
     return this.http.get(this.url+"procesos");
@@ -30,14 +30,14 @@ export class ServiciosService {
     );
   }
 
-  kill(pid:string):Observable<any>{
+ /* kill(pid:string):Observable<any>{
     this.cabecera.set('Content-Type','application/json')
     let datos = {
       "pid" : pid
     }
 
     return this.http.post(this.url+"kill",datos,{headers:this.cabecera})
-  }
+  }*/
   cpu():Observable<any>{
     return this.http.get(this.url+"cpu")
   }
@@ -46,7 +46,7 @@ export class ServiciosService {
     let datos ={
       pid : pid
     }
-    const respuestaRaw = await fetch(this.url, {
+    const respuestaRaw = await fetch(this.url+"kill", {
         body: JSON.stringify(datos), // <-- Aquí van los datos
         headers: {
           "Content-Type": "application/json", // <-- Importante el encabezado
@@ -61,7 +61,7 @@ export class ServiciosService {
     let datos ={
       user : String(user)
     }
-    const respuestaRaw = await fetch(this.url+"/user", {
+    const respuestaRaw = await fetch(this.url+"user", {
         body: JSON.stringify(datos), // <-- Aquí van los datos
         headers: {
           "Content-Type": "application/json", // <-- Importante el encabezado
