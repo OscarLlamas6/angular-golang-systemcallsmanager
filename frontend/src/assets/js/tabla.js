@@ -12,7 +12,7 @@ async function terminar(pid){
 
 async function strace(nombre){
   const datos = {
-    name: nombre
+    process_name: nombre
   }
   var apiUrl="http://192.168.0.19:3000/api/strace"
   const resp = await fetch(apiUrl,{
@@ -29,5 +29,6 @@ async function strace(nombre){
       window.localStorage.setItem("result", JSON.stringify(respuesta))
       window.localStorage.setItem("nombre",nombre)
       window.open("http://localhost:4200/histograma")
+
 }
 

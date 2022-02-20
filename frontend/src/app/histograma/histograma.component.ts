@@ -8,7 +8,7 @@ import * as Chart from 'chart.js';
 })
 export class HistogramaComponent implements OnInit {
 
-  myBarChart:any
+  system_calls:any
   constructor() { }
 
   ngOnInit(): void {
@@ -18,6 +18,7 @@ export class HistogramaComponent implements OnInit {
     let datos = JSON.parse(localStorage.getItem("result"));
 
     let summary = datos.summary;
+    this.system_calls = datos.system_calls
     let summ = []
     let names = []
     summary.forEach(element => {
