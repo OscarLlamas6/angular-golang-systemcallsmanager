@@ -149,7 +149,7 @@ func Strace(c *gin.Context) {
         var ss helpers.SyscallCounter
         ss = ss.Init()
 
-        cmd := exec.Command("bash", "-c", params["process_name"])
+        cmd := exec.Command(params["process_name"])
         cmd.Stderr = os.Stderr
         cmd.Stdout = os.Stdout
         cmd.Stdin = os.Stdin
