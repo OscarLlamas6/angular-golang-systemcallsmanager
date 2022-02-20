@@ -5,11 +5,22 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"os/exec"
+	"syscall"
 	"strings"
 
 	"github.com/gin-gonic/gin"
 )
+
+type SystemCall struct {
+    Id   uint64 `json:"id"`
+    Name string `json:"name"`
+}
+
+type SystemCalls struct {
+    Calls []SystemCall
+}
 
 func CORSMiddleware() gin.HandlerFunc {
 
@@ -31,6 +42,10 @@ func CORSMiddleware() gin.HandlerFunc {
 
 func Saludo(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": "Golang Gin - SO2 :D"})
+}
+
+func (obj *SystemCalls) AddItem(item SystemCall) {
+    obj.Calls = append(obj.Calls, item)
 }
 
 func RAM(c *gin.Context) {
@@ -122,6 +137,69 @@ func CPU(c *gin.Context) {
 	})
 }
 
+func Strace(c *gin.Context) {
+	decoder := json.NewDecoder(c.Request.Body)
+	var params map[string]string
+	decoder.Decode(&params)
+
+	if len(params) != 0 {
+        var err error
+        var regs syscall.PtraceRegs
+        var ss syscallCounter
+        ss = ss.init()
+
+        cmd := exec.Command("bash", "-c", params["process_name"])
+        cmd.Stderr = os.Stderr
+        cmd.Stdout = os.Stdout
+        cmd.Stdin = os.Stdin
+        cmd.SysProcAttr = &syscall.SysProcAttr{
+            Ptrace: true,
+        }
+
+        cmd.Start()
+        err = cmd.Wait()
+        if err != nil {
+            fmt.Printf("Wait err %v \n", err)
+        }
+
+    	var pid = cmd.Process.Pid
+    	exit := true
+        obj := SystemCalls{}
+    	for {
+    		if exit {
+    			err = syscall.PtraceGetRegs(pid, &regs)
+    			if err != nil {
+    				break
+    			}
+
+    			obj_system_call := SystemCall{
+                    Id:  regs.Orig_rax,
+                    Name: ss.getName(regs.Orig_rax),
+                }
+                obj.AddItem(obj_system_call)
+                ss.inc(regs.Orig_rax)
+    		}
+
+    		err = syscall.PtraceSyscall(pid, 0)
+    		if err != nil {
+    			panic(err)
+    		}
+
+    		_, err = syscall.Wait4(pid, nil, 0, nil)
+    		if err != nil {
+    			panic(err)
+    		}
+
+    		exit = !exit
+    	}
+
+        c.JSON(http.StatusOK, gin.H{
+            "summary": ss.getSummary(),
+            "system_calls": obj.Calls,
+        })
+    }
+}
+
 func main() {
 
 	// Se crea el servidor con GIN
@@ -139,6 +217,7 @@ func main() {
 	{
 		api.GET("/ram", RAM)
 		api.GET("/procesos", Procesos)
+		api.POST("/strace", Strace)
 		api.POST("/user", Usuarios)
 		api.POST("/kill", Kill)
 		api.GET("/cpu", CPU)
