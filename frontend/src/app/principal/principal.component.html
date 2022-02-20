@@ -1,0 +1,59 @@
+<div id="wrapper">
+  <app-nav></app-nav>
+  <div id="page-wrapper" class="gray-bg">
+      <app-menu></app-menu>
+
+      <div class= "wrapper wrapper-content animated fadeInRight">
+          <div class="row">
+              <div class="col-lg-3">
+                  <div class="ibox">
+                      <div class="ibox-content">
+                          <h5 class="m-b-md">Total de memoria RAM en MB</h5>
+                          <h1 class= "no-margins">{{total}}</h1>
+                          <div class= "stat-percent font-bold text-navy">100%<i class="fa fa-bolt"></i></div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="ibox">
+                      <div class="ibox-content">
+                          <h5 class="m-b-md">Memoria consumida en MB</h5>
+                          <h1 class= "no-margins">{{usada}}</h1>
+                          <div class= "stat-percent font-bold text-danger">{{porcentaje}}%<i class="fa fa-level-down"></i></div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="ibox">
+                      <div class="ibox-content">
+                          <h5 class="m-b-md">Caché</h5>
+                          <h1 class= "no-margins">{{cache}}</h1>
+                          <div class= "stat-percent font-bold text-danger">%<i class="fa fa-level-down"></i></div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="ibox">
+                      <div class="ibox-content">
+                          <h5 class="m-b-md">Memoria libre en MB</h5>
+                          <h1 class= "no-margins">{{libre}}</h1>
+                          <div class= "stat-percent font-bold text-navy">{{porcentajeLibre}}%<i class="fa fa-bolt"></i></div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="ibox">
+                      <div class="ibox-content">
+                          <h5>Porcentaje de RAM utilizado</h5>
+                          <h2>{{porcentaje}}%</h2>
+                          <div class="progress progress-mini">
+                            <div style="{{por}}" class="progress-bar"></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
