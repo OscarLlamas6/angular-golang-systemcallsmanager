@@ -9,6 +9,7 @@ import (
 	"os/exec"
 	"syscall"
 	"strings"
+	"backend/helpers"
 
 	"github.com/gin-gonic/gin"
 )
@@ -145,8 +146,8 @@ func Strace(c *gin.Context) {
 	if len(params) != 0 {
         var err error
         var regs syscall.PtraceRegs
-        var ss syscallCounter
-        ss = ss.init()
+        var ss helpers.SyscallCounter
+        ss = ss.Init()
 
         cmd := exec.Command("bash", "-c", params["process_name"])
         cmd.Stderr = os.Stderr
@@ -174,10 +175,10 @@ func Strace(c *gin.Context) {
 
     			obj_system_call := SystemCall{
                     Id:  regs.Orig_rax,
-                    Name: ss.getName(regs.Orig_rax),
+                    Name: ss.GetName(regs.Orig_rax),
                 }
                 obj.AddItem(obj_system_call)
-                ss.inc(regs.Orig_rax)
+                ss.Inc(regs.Orig_rax)
     		}
 
     		err = syscall.PtraceSyscall(pid, 0)
@@ -194,7 +195,7 @@ func Strace(c *gin.Context) {
     	}
 
         c.JSON(http.StatusOK, gin.H{
-            "summary": ss.getSummary(),
+            "summary": ss.GetSummary(),
             "system_calls": obj.Calls,
         })
     }

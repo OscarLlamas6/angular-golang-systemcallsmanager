@@ -1,4 +1,4 @@
-package main
+package helpers
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	sec "github.com/seccomp/libseccomp-golang"
 )
 
-type syscallCounter []int
+type SyscallCounter []int
 
 const maxSyscalls = 303
 
@@ -23,12 +23,12 @@ func (obj *SysCalls) AddItem(item SysCall) {
     obj.Calls = append(obj.Calls, item)
 }
 
-func (s syscallCounter) init() syscallCounter {
-	s = make(syscallCounter, maxSyscalls)
+func (s SyscallCounter) Init() SyscallCounter {
+	s = make(SyscallCounter, maxSyscalls)
 	return s
 }
 
-func (s syscallCounter) inc(syscallID uint64) error {
+func (s SyscallCounter) Inc(syscallID uint64) error {
 	if syscallID > maxSyscalls {
 		return fmt.Errorf("invalid syscall ID (%x)", syscallID)
 	}
@@ -37,7 +37,7 @@ func (s syscallCounter) inc(syscallID uint64) error {
 	return nil
 }
 
-func (s syscallCounter) getSummary() []SysCall {
+func (s SyscallCounter) GetSummary() []SysCall {
     obj := SysCalls{}
 	for k, v := range s {
 		if v > 0 {
@@ -55,7 +55,7 @@ func (s syscallCounter) getSummary() []SysCall {
 	return obj.Calls
 }
 
-func (s syscallCounter) getName(syscallID uint64) string {
+func (s SyscallCounter) GetName(syscallID uint64) string {
 	name, _ := sec.ScmpSyscall(syscallID).GetName()
 	return name
 }
