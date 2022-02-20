@@ -20,4 +20,7 @@ async function strace(nombre){
         },
         body: "{\"name\":\""+nombre+"\"}"
       })
+
+  console.log(resp)
 }
+

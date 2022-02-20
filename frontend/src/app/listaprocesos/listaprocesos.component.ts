@@ -169,6 +169,7 @@ export class ListaprocesosComponent implements OnInit {
 
         // PARA EL BOTÓN STRACE
         strace.setAttribute("class","btn btn-outline btn-info  dim ")
+        strace.setAttribute("id",item.nombre)
         strace.setAttribute("type","button")
         strace.setAttribute("onclick","strace("+item.nombre+");")
         let listrace = document.createElement("li")
