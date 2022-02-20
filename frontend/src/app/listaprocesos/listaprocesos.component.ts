@@ -163,15 +163,15 @@ export class ListaprocesosComponent implements OnInit {
         // PARA EL BOTÓN KILL
         boton.setAttribute("class","btn btn-outline btn-danger  dim ")
         boton.setAttribute("type","button")
-        boton.setAttribute("onclick","terminar("+item.pid+");")
+        boton.setAttribute("onclick","terminar("+item.pid+")")
         let li = document.createElement("li")
         li.setAttribute("class","fa fa-warning")
 
         // PARA EL BOTÓN STRACE
         strace.setAttribute("class","btn btn-outline btn-info  dim ")
-        strace.setAttribute("id",item.nombre)
+        strace.setAttribute("id",item.pid)
         strace.setAttribute("type","button")
-        strace.setAttribute("onclick","strace("+item.nombre+");")
+        strace.setAttribute("onclick","strace('"+item.nombre+"')")
         let listrace = document.createElement("li")
         listrace.setAttribute("class","fa fa-info")
         boton.appendChild(li)

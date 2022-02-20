@@ -8,9 +8,6 @@ import * as Chart from 'chart.js';
 })
 export class HistogramaComponent implements OnInit {
 
-
-
-
   myBarChart:any
   constructor() { }
 
@@ -18,22 +15,25 @@ export class HistogramaComponent implements OnInit {
     const canvas = <HTMLCanvasElement> document.getElementById('histogram');
     const ctx = canvas.getContext('2d');
 
+    let datos = JSON.parse(localStorage.getItem("result"));
 
+    let summary = datos.summary;
+    let summ = []
+    let names = []
+    summary.forEach(element => {
+
+      summ.push(element.count)
+      names.push(element.name)
+    });
     const chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: [0, 1, 2, 3, 4],
+        labels: names,
         datasets: [{
-          label: 'Number of Arrivals',
-          data: [19],
-          backgroundColor: "green"
+          label: localStorage.getItem("nombre"),
+          data: summ,
+          backgroundColor: "#1ABC9C"
         },
-        {
-
-          data: [35],
-
-        },
-
       ]
       },
       options: {
