@@ -18,6 +18,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { HistogramaComponent } from './histograma/histograma.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ToastrModule } from 'ngx-toastr';
     MenuComponent,
     NavComponent,
     PrincipalComponent,
+    HistogramaComponent,
   ],
   imports: [
     BrowserModule,

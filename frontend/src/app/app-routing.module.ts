@@ -1,3 +1,4 @@
+import { HistogramaComponent } from './histograma/histograma.component';
 import { GraphRamComponent } from './graph-ram/graph-ram.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,6 +11,10 @@ const routes: Routes = [
   {
     path:'principal',
     component: PrincipalComponent
+  },
+  {
+    path:'histograma',
+    component: HistogramaComponent
   },
   {
     path:'arbolprocesos',
