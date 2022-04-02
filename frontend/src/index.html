@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>G12 Práctica 1</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="./assets/css/plugins/footable/footable.core.css" rel="stylesheet">
+  <link href="./assets/css/animate.css" rel="stylesheet">
+  <link href="./assets/css/style.css" rel="stylesheet">
+  <link href="./assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+  <link href="./assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/e3a700b033.js" crossorigin="anonymous"></script>
+  <link href="./assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="mat-typography">
+  <app-root></app-root>
+      <!-- Mainly scripts -->
+      <script src="./assets/js/jquery-3.1.1.min.js"></script>
+      <script src="./assets/js/popper.min.js"></script>
+      <script src="./assets/js/bootstrap.js"></script>
+      <script src="./assets/js/tabla.js"></script>
+    <!-- Custom and plugin javascript -->
+    <script src="./assets/js/inspinia.js"></script>
+    <script src="./assets/js/plugins/pace/pace.min.js"></script>
+
+    <!-- iCheck -->
+    <script src="./assets/js/plugins/iCheck/icheck.min.js"></script>
+
+
+        <!-- Chosen -->
+        <script src="./assets/js/plugins/chosen/chosen.jquery.js"></script>
+
+       <!-- JSKnob -->
+       <script src="./assets/js/plugins/jsKnob/jquery.knob.js"></script>
+
+       <!-- Input Mask-->
+        <script src="./assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+       <!-- Data picker -->
+       <script src="./assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+       <!-- NouSlider -->
+       <script src="./assets/js/plugins/nouslider/jquery.nouislider.min.js"></script>
+
+       <!-- Switchery -->
+       <script src="./assets/js/plugins/switchery/switchery.js"></script>
+
+        <!-- IonRangeSlider -->
+        <script src="./assets/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+        <!-- iCheck -->
+        <script src="./assets/js/plugins/iCheck/icheck.min.js"></script>
+
+
+        <!-- Color picker -->
+        <script src="./assets/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+        <!-- Clock picker -->
+        <script src="./assets/js/plugins/clockpicker/clockpicker.js"></script>
+
+        <!-- Image cropper -->
+        <script src="./assets/js/plugins/cropper/cropper.min.js"></script>
+
+        <!-- Date range use moment.js same as full calendar plugin -->
+        <script src="./assets/js/plugins/fullcalendar/moment.min.js"></script>
+
+        <!-- Date range picker -->
+        <script src="./assets/js/plugins/daterangepicker/daterangepicker.js"></script>
+
+        <!-- Select2 -->
+        <script src="./assets/js/plugins/select2/select2.full.min.js"></script>
+
+        <!-- TouchSpin -->
+        <script src="./assets/js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>
+
+        <!-- Tags Input -->
+        <script src="./assets/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+
+        <!-- Dual Listbox -->
+        <script src="./assets/js/plugins/dualListbox/jquery.bootstrap-duallistbox.js"></script>
+        <!-- FooTable -->
+        <script src="./assets/js/plugins/footable/footable.all.min.js"></script>
+
+        <script src="./assets/js/plugins/jsTree/jstree.min.js"></script>
+        <style>
+          .jstree-open > .jstree-anchor > .fa-folder:before {
+              content: "\f07c";
+          }
+
+          .jstree-default .jstree-icon.none {
+              width: 0;
+          }
+      </style>
+<script>
+  $(document).ready(function(){
+
+      $('#jstree1').jstree({
+          'core' : {
+              'check_callback' : true
+          },
+          'plugins' : [ 'types', 'dnd' ],
+          'types' : {
+              'default' : {
+                  'icon' : 'fa fa-folder'
+              },
+              'html' : {
+                  'icon' : 'fa fa-file-code-o'
+              },
+              'svg' : {
+                  'icon' : 'fa fa-file-picture-o'
+              },
+              'css' : {
+                  'icon' : 'fa fa-file-code-o'
+              },
+              'img' : {
+                  'icon' : 'fa fa-file-image-o'
+              },
+              'js' : {
+                  'icon' : 'fa fa-file-text-o'
+              }
+
+          }
+      });
+
+      $('#using_json').jstree({
+          'core' : {
+          'data' : [
+              'Empty Folder',
+              {
+                  'text': 'Resources',
+                  'state': {
+                      'opened': true
+                  },
+                  'children': [
+                      {
+                          'text': 'css',
+                          'children': [
+                              {
+                                  'text': 'animate.css', 'icon': 'none'
+                              },
+                              {
+                                  'text': 'bootstrap.css', 'icon': 'none'
+                              },
+                              {
+                                  'text': 'main.css', 'icon': 'none'
+                              },
+                              {
+                                  'text': 'style.css', 'icon': 'none'
+                              }
+                          ],
+                          'state': {
+                              'opened': true
+                          }
+                      },
+                      {
+                          'text': 'js',
+                          'children': [
+                              {
+                                  'text': 'bootstrap.js', 'icon': 'none'
+                              },
+                              {
+                                  'text': 'inspinia.min.js', 'icon': 'none'
+                              },
+                              {
+                                  'text': 'jquery.min.js', 'icon': 'none'
+                              },
+                              {
+                                  'text': 'jsTree.min.js', 'icon': 'none'
+                              },
+                              {
+                                  'text': 'custom.min.js', 'icon': 'none'
+                              }
+                          ],
+                          'state': {
+                              'opened': true
+                          }
+                      },
+                      {
+                          'text': 'html',
+                          'children': [
+                              {
+                                  'text': 'layout.html', 'icon': 'none'
+                              },
+                              {
+                                  'text': 'navigation.html', 'icon': 'none'
+                              },
+                              {
+                                  'text': 'navbar.html', 'icon': 'none'
+                              },
+                              {
+                                  'text': 'footer.html', 'icon': 'none'
+                              },
+                              {
+                                  'text': 'sidebar.html', 'icon': 'none'
+                              }
+                          ],
+                          'state': {
+                              'opened': true
+                          }
+                      }
+                  ]
+              },
+              'Fonts',
+              'Images',
+              'Scripts',
+              'Templates',
+          ]
+      } });
+
+  });
+</script>
+
+<!-- Page-Level Scripts -->
+<script>
+  $(document).ready(function() {
+
+      $('.footable').footable();
+
+  });
+
+</script>
+    </body>
+</html>
